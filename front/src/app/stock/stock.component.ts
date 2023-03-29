@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import {
+  faRotateRight,
+  faPlus,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-stock',
@@ -7,5 +11,7 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./stock.component.scss'],
 })
 export class StockComponent {
-  faCoffee = faCoffee;
+  faRotateRight = faRotateRight;
+  faPlus = faPlus;
+  faTrashAlt = faTrashAlt;
 }
