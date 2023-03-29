@@ -5,6 +5,7 @@ import {
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { Article } from '../interfaces/article';
+import { ArticleService } from '../services/article.service';
 
 @Component({
   selector: 'app-stock',
@@ -12,25 +13,12 @@ import { Article } from '../interfaces/article';
   styleUrls: ['./stock.component.scss'],
 })
 export class StockComponent implements OnDestroy {
-  articles: Article[] = [
-    {
-      id: 'a1',
-      name: 'Tournevis',
-      price: 3.99,
-      qty: 100,
-    },
-    {
-      id: 'a2',
-      name: 'Pelle',
-      price: 5,
-      qty: 54,
-    },
-  ];
   faPlus = faPlus;
   faRotateRight = faRotateRight;
   faTrashAlt = faTrashAlt;
 
-  constructor() {
+  constructor(protected readonly articleService: ArticleService) {
+    console.log('articleService: ', articleService);
     console.log('new stock component');
   }
 
