@@ -69,4 +69,8 @@ export class StockComponent implements OnDestroy {
   setErrorMsg(err: Error) {
     this.errorMsg = err.message;
   }
+
+  resetErrorMsg() {
+    this.errorMsg = '';
+  }
 }

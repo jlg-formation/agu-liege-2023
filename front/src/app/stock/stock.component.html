@@ -6,6 +6,7 @@
         [observable]="refresh.bind(this)"
         label="Rafraîchir"
         [icon]="faRotateRight"
+        (start)="resetErrorMsg()"
         (error)="setErrorMsg($event)"
       ></app-async-icon-button>
       <a routerLink="add" class="button" title="Ajouter">

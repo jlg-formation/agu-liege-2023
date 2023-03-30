@@ -22,11 +22,15 @@ export class AsyncIconButtonComponent {
   @Output()
   error = new EventEmitter<Error>();
 
+  @Output()
+  start = new EventEmitter<void>();
+
   doSomething() {
     of(undefined)
       .pipe(
         tap(() => {
           this.isRunning = true;
+          this.start.emit();
         }),
         switchMap(this.observable),
         catchError((err) => {
