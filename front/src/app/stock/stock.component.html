@@ -10,7 +10,7 @@
       </a>
       <app-async-icon-button
         [hidden]="selectedArticles.size === 0"
-        [observable]="remove()"
+        [observable]="remove.bind(this)"
         label="Supprimer"
       ></app-async-icon-button>
     </nav>

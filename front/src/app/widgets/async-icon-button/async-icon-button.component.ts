@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { Observable, of, switchMap } from 'rxjs';
+import { faTrashAlt, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { Observable, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-async-icon-button',
@@ -8,8 +8,10 @@ import { Observable, of, switchMap } from 'rxjs';
   styleUrls: ['./async-icon-button.component.scss'],
 })
 export class AsyncIconButtonComponent {
+  faCircleNotch = faCircleNotch;
+  isRunning = false;
   @Input()
-  observable: Observable<void> = of(undefined);
+  observable: () => Observable<void> = () => of(undefined);
 
   @Input()
   label = '';
@@ -17,9 +19,13 @@ export class AsyncIconButtonComponent {
   doSomething() {
     of(undefined)
       .pipe(
-        // before
-        switchMap(() => this.observable)
-        // after
+        tap(() => {
+          this.isRunning = true;
+        }),
+        switchMap(this.observable),
+        tap(() => {
+          this.isRunning = false;
+        })
       )
       .subscribe();
   }
