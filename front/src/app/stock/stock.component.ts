@@ -4,7 +4,7 @@ import {
   faRotateRight,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import { delay, of, switchMap, tap } from 'rxjs';
+import { delay, Observable, of, switchMap, tap } from 'rxjs';
 import { Article } from '../interfaces/article';
 import { ArticleService } from '../services/article.service';
 
@@ -28,14 +28,8 @@ export class StockComponent implements OnDestroy {
     console.log('stock component disappear');
   }
 
-  remove() {
-    console.log('about to remove');
-    return of(undefined).pipe(
-      delay(2000),
-      switchMap(() => {
-        const ids = [...this.selectedArticles].map((a) => a.id);
-        return this.articleService.remove(ids);
-      }),
+  private refreshAndClear(obs: Observable<void>): Observable<void> {
+    return obs.pipe(
       switchMap(() => {
         return this.articleService.refresh();
       }),
@@ -45,17 +39,21 @@ export class StockComponent implements OnDestroy {
     );
   }
 
-  refresh() {
-    console.log('refreshing');
+  remove() {
+    console.log('about to remove');
     return of(undefined).pipe(
       delay(2000),
       switchMap(() => {
-        return this.articleService.refresh();
+        const ids = [...this.selectedArticles].map((a) => a.id);
+        return this.articleService.remove(ids);
       }),
-      tap(() => {
-        this.selectedArticles.clear();
-      })
+      (obs) => this.refreshAndClear(obs)
     );
+  }
+
+  refresh() {
+    console.log('refreshing');
+    return of(undefined).pipe(delay(2000), this.refreshAndClear.bind(this));
   }
 
   select(a: Article) {
