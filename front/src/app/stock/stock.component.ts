@@ -30,18 +30,16 @@ export class StockComponent implements OnDestroy {
 
   remove() {
     console.log('about to remove');
-    of(undefined)
-      .pipe(
-        delay(2000),
-        switchMap(() => {
-          const ids = [...this.selectedArticles].map((a) => a.id);
-          return this.articleService.remove(ids);
-        }),
-        switchMap(() => {
-          return this.articleService.refresh();
-        })
-      )
-      .subscribe();
+    return of(undefined).pipe(
+      delay(2000),
+      switchMap(() => {
+        const ids = [...this.selectedArticles].map((a) => a.id);
+        return this.articleService.remove(ids);
+      }),
+      switchMap(() => {
+        return this.articleService.refresh();
+      })
+    );
   }
 
   select(a: Article) {
