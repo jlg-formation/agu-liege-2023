@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Article } from '../interfaces/article';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Article, NewArticle } from '../interfaces/article';
+
+const generateId = () => {
+  return Date.now() + '_' + Math.round(Math.random() * 1e12);
+};
 
 const articles: Article[] = [
   {
@@ -28,5 +32,16 @@ export class ArticleService {
       this.articles$.value.push({ id: 'a3', name: 'Truc', price: 1, qty: 12 });
       this.articles$.next(this.articles$.value);
     }, 2000);
+  }
+
+  add(newArticle: NewArticle): Observable<void> {
+    const article = { ...newArticle, id: generateId() };
+    articles.push(article);
+    return of(undefined);
+  }
+
+  refresh(): Observable<void> {
+    this.articles$.next(articles);
+    return of(void 0);
   }
 }
