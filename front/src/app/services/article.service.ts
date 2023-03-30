@@ -12,7 +12,7 @@ let articles: Article[] = [];
   providedIn: 'root',
 })
 export class ArticleService {
-  articles$ = new BehaviorSubject<Article[]>(articles);
+  articles$ = new BehaviorSubject<undefined | Article[]>(undefined);
 
   add(newArticle: NewArticle): Observable<void> {
     const article = { ...newArticle, id: generateId() };

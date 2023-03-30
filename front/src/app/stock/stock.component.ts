@@ -26,6 +26,21 @@ export class StockComponent implements OnDestroy {
   constructor(protected readonly articleService: ArticleService) {
     console.log('articleService: ', articleService);
     console.log('new stock component');
+    this.articleService.articles$
+      .pipe(
+        tap((articles) => {
+          this.isLoading = articles === undefined;
+          if (this.isLoading) {
+            of(undefined)
+              .pipe(
+                delay(2000),
+                switchMap(() => this.articleService.refresh())
+              )
+              .subscribe();
+          }
+        })
+      )
+      .subscribe();
   }
 
   ngOnDestroy(): void {
