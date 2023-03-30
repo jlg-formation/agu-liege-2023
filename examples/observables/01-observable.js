@@ -1,15 +1,22 @@
 const rxjs = require("rxjs");
 
-const { Observable } = rxjs;
+const { Observable, throwError } = rxjs;
 
 const obs = new Observable((subscriber) => {
-  subscriber.next(12);
-  subscriber.next("qqq");
-  subscriber.next({ a: 12 });
-  subscriber.error(new Error("oups... error!"));
+  subscriber.next(0);
+  const timer = setTimeout(() => {
+    subscriber.next(1);
+    subscriber.complete();
+    console.log("fin");
+  }, 1000);
+
+  return () => {
+    console.log("unsubscribing");
+    clearTimeout(timer);
+  };
 });
 
-obs.subscribe({
+const subscription = obs.subscribe({
   next: (x) => {
     console.log("x: ", x);
   },
@@ -20,3 +27,7 @@ obs.subscribe({
     console.log("err: ", err.message);
   },
 });
+
+setTimeout(() => {
+  subscription.unsubscribe();
+}, 500);
