@@ -11,7 +11,7 @@ let articles: Article[] = [
   },
   {
     id: "a2",
-    name: "Pelle",
+    name: "Bêche",
     price: 5,
     qty: 54,
   },

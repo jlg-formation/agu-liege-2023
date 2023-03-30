@@ -3,6 +3,7 @@ import {
   faPlus,
   faRotateRight,
   faTrashAlt,
+  faCircleNotch,
 } from '@fortawesome/free-solid-svg-icons';
 import { delay, Observable, of, switchMap, tap } from 'rxjs';
 import { Article } from '../interfaces/article';
@@ -14,10 +15,12 @@ import { ArticleService } from '../services/article.service';
   styleUrls: ['./stock.component.scss'],
 })
 export class StockComponent implements OnDestroy {
+  isLoading = true;
   errorMsg = '';
   faPlus = faPlus;
   faRotateRight = faRotateRight;
   faTrashAlt = faTrashAlt;
+  faCircleNotch = faCircleNotch;
   selectedArticles = new Set<Article>();
 
   constructor(protected readonly articleService: ArticleService) {
