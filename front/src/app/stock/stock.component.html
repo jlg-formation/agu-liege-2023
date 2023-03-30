@@ -17,6 +17,8 @@
         [observable]="remove.bind(this)"
         label="Supprimer"
         [icon]="faTrashAlt"
+        (start)="resetErrorMsg()"
+        (error)="setErrorMsg($event)"
       ></app-async-icon-button>
     </nav>
     <div class="error">
