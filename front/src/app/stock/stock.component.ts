@@ -51,6 +51,9 @@ export class StockComponent implements OnDestroy {
       delay(2000),
       switchMap(() => {
         return this.articleService.refresh();
+      }),
+      tap(() => {
+        this.selectedArticles.clear();
       })
     );
   }
