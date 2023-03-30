@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, switchMap, throwError } from 'rxjs';
-import { Article } from '../interfaces/article';
+import { Article, NewArticle } from '../interfaces/article';
 import { ArticleService } from './article.service';
 
 const url = 'http://localhost:3000/api/articles';
@@ -23,6 +23,15 @@ export class HttpArticleService extends ArticleService {
       }),
       catchError((err) => {
         return throwError(() => new Error('Problème de chargement'));
+      })
+    );
+  }
+
+  override add(newArticle: NewArticle): Observable<void> {
+    return of(undefined).pipe(
+      switchMap(() => this.http.post<void>(url, newArticle)),
+      catchError((err) => {
+        return throwError(() => new Error("Erreur lors de l'ajout"));
       })
     );
   }

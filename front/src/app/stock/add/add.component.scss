@@ -17,7 +17,11 @@ form {
     }
   }
 
-  button {
-    margin-top: 3em;
+  div.error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1em;
+    font-weight: bold;
   }
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faPlus, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
-import { delay, of, switchMap, tap } from 'rxjs';
+import { catchError, delay, finalize, of, switchMap, tap } from 'rxjs';
 import { NewArticle } from 'src/app/interfaces/article';
 import { ArticleService } from 'src/app/services/article.service';
 
@@ -12,6 +12,7 @@ import { ArticleService } from 'src/app/services/article.service';
   styleUrls: ['./add.component.scss'],
 })
 export class AddComponent {
+  errorMsg = '';
   f = new FormGroup({
     name: new FormControl('xxx', [
       Validators.required,
@@ -35,6 +36,7 @@ export class AddComponent {
     of(undefined)
       .pipe(
         tap(() => {
+          this.errorMsg = '';
           this.isSubmitting = true;
         }),
         delay(300),
@@ -46,7 +48,12 @@ export class AddComponent {
         switchMap(() => {
           return this.router.navigate(['..'], { relativeTo: this.route });
         }),
-        tap(() => {
+        catchError((err) => {
+          console.log('err: ', err);
+          this.errorMsg = err.message;
+          return of(undefined);
+        }),
+        finalize(() => {
           this.isSubmitting = false;
         })
       )
