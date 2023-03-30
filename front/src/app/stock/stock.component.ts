@@ -14,6 +14,7 @@ import { ArticleService } from '../services/article.service';
   styleUrls: ['./stock.component.scss'],
 })
 export class StockComponent implements OnDestroy {
+  errorMsg = '';
   faPlus = faPlus;
   faRotateRight = faRotateRight;
   faTrashAlt = faTrashAlt;
@@ -63,5 +64,9 @@ export class StockComponent implements OnDestroy {
       return;
     }
     this.selectedArticles.add(a);
+  }
+
+  setErrorMsg(err: Error) {
+    this.errorMsg = err.message;
   }
 }

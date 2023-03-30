@@ -6,6 +6,7 @@
         [observable]="refresh.bind(this)"
         label="Rafraîchir"
         [icon]="faRotateRight"
+        (error)="setErrorMsg($event)"
       ></app-async-icon-button>
       <a routerLink="add" class="button" title="Ajouter">
         <fa-icon [icon]="faPlus"></fa-icon>
@@ -17,6 +18,9 @@
         [icon]="faTrashAlt"
       ></app-async-icon-button>
     </nav>
+    <div class="error">
+      {{ errorMsg }}
+    </div>
     <table>
       <thead>
         <tr>
