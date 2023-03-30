@@ -2,9 +2,11 @@
   <h1>Liste des articles</h1>
   <div class="content">
     <nav>
-      <button title="Rafraîchir">
-        <fa-icon [icon]="faRotateRight"></fa-icon>
-      </button>
+      <app-async-icon-button
+        [observable]="refresh.bind(this)"
+        label="Rafraîchir"
+        [icon]="faRotateRight"
+      ></app-async-icon-button>
       <a routerLink="add" class="button" title="Ajouter">
         <fa-icon [icon]="faPlus"></fa-icon>
       </a>
@@ -12,6 +14,7 @@
         [hidden]="selectedArticles.size === 0"
         [observable]="remove.bind(this)"
         label="Supprimer"
+        [icon]="faTrashAlt"
       ></app-async-icon-button>
     </nav>
     <table>

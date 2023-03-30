@@ -4,7 +4,7 @@ import {
   faRotateRight,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import { delay, of, switchMap } from 'rxjs';
+import { delay, of, switchMap, tap } from 'rxjs';
 import { Article } from '../interfaces/article';
 import { ArticleService } from '../services/article.service';
 
@@ -36,6 +36,19 @@ export class StockComponent implements OnDestroy {
         const ids = [...this.selectedArticles].map((a) => a.id);
         return this.articleService.remove(ids);
       }),
+      switchMap(() => {
+        return this.articleService.refresh();
+      }),
+      tap(() => {
+        this.selectedArticles.clear();
+      })
+    );
+  }
+
+  refresh() {
+    console.log('refreshing');
+    return of(undefined).pipe(
+      delay(2000),
       switchMap(() => {
         return this.articleService.refresh();
       })

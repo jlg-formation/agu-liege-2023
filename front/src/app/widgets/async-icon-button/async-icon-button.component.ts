@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { faTrashAlt, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import { Observable, of, switchMap, tap } from 'rxjs';
 
 @Component({
@@ -15,7 +15,9 @@ export class AsyncIconButtonComponent {
 
   @Input()
   label = '';
-  icon = faTrashAlt;
+
+  @Input()
+  icon = faCircleNotch;
   doSomething() {
     of(undefined)
       .pipe(
