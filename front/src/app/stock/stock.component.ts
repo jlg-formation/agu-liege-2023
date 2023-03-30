@@ -5,7 +5,7 @@ import {
   faTrashAlt,
   faCircleNotch,
 } from '@fortawesome/free-solid-svg-icons';
-import { delay, Observable, of, switchMap, tap } from 'rxjs';
+import { delay, map, Observable, of, switchMap, tap } from 'rxjs';
 import { Article } from '../interfaces/article';
 import { ArticleService } from '../services/article.service';
 
@@ -28,16 +28,17 @@ export class StockComponent implements OnDestroy {
     console.log('new stock component');
     this.articleService.articles$
       .pipe(
-        tap((articles) => {
+        map((articles) => {
           this.isLoading = articles === undefined;
+        }),
+        switchMap(() => {
           if (this.isLoading) {
-            of(undefined)
-              .pipe(
-                delay(2000),
-                switchMap(() => this.articleService.refresh())
-              )
-              .subscribe();
+            return of(undefined).pipe(
+              delay(2000),
+              switchMap(() => this.articleService.refresh())
+            );
           }
+          return of(undefined);
         })
       )
       .subscribe();
