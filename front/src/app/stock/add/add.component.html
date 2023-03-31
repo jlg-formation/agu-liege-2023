@@ -17,10 +17,20 @@
     <label>
       <span>Prix*</span>
       <input type="number" formControlName="price" />
+      <span class="error">
+        <span *ngIf="f.controls.price.errors?.['required']">
+          Le champ est obligatoire
+        </span>
+      </span>
     </label>
     <label>
       <span>Quantité*</span>
       <input type="number" formControlName="qty" />
+      <span class="error">
+        <span *ngIf="f.controls.qty.errors?.['required']">
+          Le champ est obligatoire
+        </span>
+      </span>
     </label>
     <div class="error">
       {{ errorMsg }}
@@ -37,5 +47,5 @@
       <span>Ajouter</span>
     </button>
   </form>
-  {{ f.controls.name.errors | json }}
+  <!-- {{ f.controls.name.errors | json }} -->
 </main>
