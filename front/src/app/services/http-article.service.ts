@@ -21,7 +21,7 @@ export class HttpArticleService extends ArticleService {
       map((articles) => {
         this.articles$.next(articles);
       }),
-      catchError((err) => {
+      catchError(() => {
         return throwError(() => new Error('Problème de chargement'));
       })
     );
@@ -30,7 +30,7 @@ export class HttpArticleService extends ArticleService {
   override add(newArticle: NewArticle): Observable<void> {
     return of(undefined).pipe(
       switchMap(() => this.http.post<void>(url, newArticle)),
-      catchError((err) => {
+      catchError(() => {
         return throwError(() => new Error("Erreur lors de l'ajout"));
       })
     );
@@ -39,7 +39,7 @@ export class HttpArticleService extends ArticleService {
   override remove(ids: string[]): Observable<void> {
     return of(undefined).pipe(
       switchMap(() => this.http.delete<void>(url, { body: ids })),
-      catchError((err) => {
+      catchError(() => {
         return throwError(() => new Error('Erreur lors de la suppression'));
       })
     );

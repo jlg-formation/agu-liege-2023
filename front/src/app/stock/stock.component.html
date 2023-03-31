@@ -6,8 +6,8 @@
         [observable]="refresh.bind(this)"
         label="Rafraîchir"
         [icon]="faRotateRight"
-        (start)="resetErrorMsg()"
-        (error)="setErrorMsg($event)"
+        (actionStart)="resetErrorMsg()"
+        (actionError)="setErrorMsg($event)"
       ></app-async-icon-button>
       <a routerLink="add" class="button" title="Ajouter">
         <fa-icon [icon]="faPlus"></fa-icon>
@@ -17,8 +17,8 @@
         [observable]="remove.bind(this)"
         label="Supprimer"
         [icon]="faTrashAlt"
-        (start)="resetErrorMsg()"
-        (error)="setErrorMsg($event)"
+        (actionStart)="resetErrorMsg()"
+        (actionError)="setErrorMsg($event)"
       ></app-async-icon-button>
     </nav>
     <div class="error">

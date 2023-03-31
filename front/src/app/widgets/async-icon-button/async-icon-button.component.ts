@@ -20,22 +20,22 @@ export class AsyncIconButtonComponent {
   icon = faCircleNotch;
 
   @Output()
-  error = new EventEmitter<Error>();
+  actionError = new EventEmitter<Error>();
 
   @Output()
-  start = new EventEmitter<void>();
+  actionStart = new EventEmitter<void>();
 
   doSomething() {
     of(undefined)
       .pipe(
         tap(() => {
           this.isRunning = true;
-          this.start.emit();
+          this.actionStart.emit();
         }),
         switchMap(this.observable),
         catchError((err) => {
           console.log('err: ', err);
-          this.error.emit(err instanceof Error ? err : new Error(err));
+          this.actionError.emit(err instanceof Error ? err : new Error(err));
           return of(undefined);
         }),
         finalize(() => {
