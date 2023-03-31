@@ -1,7 +1,7 @@
 form {
   display: flex;
   flex-flow: column;
-  gap: 2em;
+  gap: 1em;
 
   width: 100%;
   max-width: 20em;
@@ -14,6 +14,16 @@ form {
       padding: 0.5em 1em;
       border: 0.1em solid #aaa;
       border-radius: 0.3em;
+
+      &.ng-invalid {
+        border-color: red;
+        outline: red;
+      }
+    }
+
+    span.error {
+      height: 1em;
+      font-weight: bold;
     }
   }
 
