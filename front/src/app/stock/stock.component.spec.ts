@@ -1,6 +1,7 @@
 import {
   ComponentFixture,
   fakeAsync,
+  flush,
   TestBed,
   tick,
 } from '@angular/core/testing';
@@ -24,7 +25,16 @@ describe('StockComponent', () => {
     fixture = TestBed.createComponent(StockComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    tick(2000);
+    expect(component).toBeTruthy();
+  }));
 
+  it('should refresh', fakeAsync(() => {
+    fixture = TestBed.createComponent(StockComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    tick(2000);
+    component.refresh().subscribe();
     tick(2000);
     expect(component).toBeTruthy();
   }));
