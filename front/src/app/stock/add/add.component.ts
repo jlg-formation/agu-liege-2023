@@ -14,10 +14,7 @@ import { ArticleService } from 'src/app/services/article.service';
 export class AddComponent {
   errorMsg = '';
   f = new FormGroup({
-    name: new FormControl('xxx', [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     price: new FormControl(0, [Validators.required]),
     qty: new FormControl(0, [Validators.required]),
   });

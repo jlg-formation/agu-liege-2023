@@ -5,31 +5,38 @@
       <span>Nom*</span>
       <input type="text" formControlName="name" appAutofocus />
       <span class="error">
-        <span *ngIf="f.controls.name.errors?.['required']">
-          Le champ est obligatoire
-        </span>
-        <span *ngIf="f.controls.name.errors?.['minlength']">
-          Entrer au moins
-          {{ f.controls.name.errors?.['minlength'].requiredLength }} caractères
-        </span>
+        <ng-container *ngIf="f.controls.name.touched">
+          <span *ngIf="f.controls.name.errors?.['required']">
+            Le champ est obligatoire
+          </span>
+          <span *ngIf="f.controls.name.errors?.['minlength']">
+            Entrer au moins
+            {{ f.controls.name.errors?.['minlength'].requiredLength }}
+            caractères
+          </span>
+        </ng-container>
       </span>
     </label>
     <label>
       <span>Prix*</span>
       <input type="number" formControlName="price" />
       <span class="error">
-        <span *ngIf="f.controls.price.errors?.['required']">
-          Le champ est obligatoire
-        </span>
+        <ng-container *ngIf="f.controls.price.touched">
+          <span *ngIf="f.controls.price.errors?.['required']">
+            Le champ est obligatoire
+          </span>
+        </ng-container>
       </span>
     </label>
     <label>
       <span>Quantité*</span>
       <input type="number" formControlName="qty" />
       <span class="error">
-        <span *ngIf="f.controls.qty.errors?.['required']">
-          Le champ est obligatoire
-        </span>
+        <ng-container *ngIf="f.controls.qty.touched">
+          <span *ngIf="f.controls.qty.errors?.['required']">
+            Le champ est obligatoire
+          </span>
+        </ng-container>
       </span>
     </label>
     <div class="error">
