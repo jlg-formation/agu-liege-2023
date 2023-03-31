@@ -13,11 +13,12 @@ import { HttpArticleService } from './services/http-article.service';
 
 import { registerLocaleData } from '@angular/common';
 import BelgianLocale from '@angular/common/locales/fr-BE';
+import { NotfoundComponent } from './routes/notfound/notfound.component';
 
 registerLocaleData(BelgianLocale, 'fr-BE');
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LegalComponent],
+  declarations: [AppComponent, HomeComponent, LegalComponent, NotfoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
