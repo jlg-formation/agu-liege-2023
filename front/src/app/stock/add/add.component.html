@@ -30,7 +30,7 @@
     </label>
     <label>
       <span>Quantité*</span>
-      <input type="number" formControlName="qty" />
+      <input type="string" formControlName="qty" />
       <span class="error">
         <ng-container *ngIf="f.controls.qty.touched">
           <span *ngIf="f.controls.qty.errors?.['required']">
