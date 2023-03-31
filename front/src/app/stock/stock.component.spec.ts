@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { FontAwesomeTestingModule } from '@fortawesome/angular-fontawesome/testing';
 import { WidgetsModule } from '../widgets/widgets.module';
 
@@ -13,13 +18,14 @@ describe('StockComponent', () => {
       imports: [WidgetsModule, FontAwesomeTestingModule],
       declarations: [StockComponent],
     }).compileComponents();
+  });
 
+  it('should create', fakeAsync(() => {
     fixture = TestBed.createComponent(StockComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
 
-  it('should create', () => {
+    tick(2000);
     expect(component).toBeTruthy();
-  });
+  }));
 });
