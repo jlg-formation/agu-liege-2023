@@ -87,4 +87,34 @@ describe('HttpArticleService', () => {
     req.flush('', { status: 405, statusText: 'Method Not Implemented' });
     expect(service).toBeTruthy();
   });
+
+  it('should remove', () => {
+    service.remove([]).subscribe();
+    const req = ctrl.expectOne(url);
+    expect(req.request.method).toEqual('DELETE');
+    req.flush('', { status: 204, statusText: 'No Content' });
+    expect(service).toBeTruthy();
+  });
+
+  it('should remove in error', (done: DoneFn) => {
+    let mustGoHere = false;
+    service
+      .remove([])
+      .pipe(
+        catchError(() => {
+          mustGoHere = true;
+          return of(undefined);
+        })
+      )
+      .subscribe({
+        complete: () => {
+          expect(mustGoHere).toBe(true);
+          done();
+        },
+      });
+    const req = ctrl.expectOne(url);
+    expect(req.request.method).toEqual('DELETE');
+    req.flush('', { status: 405, statusText: 'Method Not Implemented' });
+    expect(service).toBeTruthy();
+  });
 });
