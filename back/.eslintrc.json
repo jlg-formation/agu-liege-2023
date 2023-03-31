@@ -11,6 +11,8 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "rules": {},
+  "rules": {
+    "eqeqeq": "error"
+  },
   "ignorePatterns": ["dist"]
 }
