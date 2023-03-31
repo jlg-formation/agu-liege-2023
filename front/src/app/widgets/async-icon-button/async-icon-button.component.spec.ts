@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FontAwesomeTestingModule } from '@fortawesome/angular-fontawesome/testing';
 
 import { AsyncIconButtonComponent } from './async-icon-button.component';
 
@@ -8,9 +9,9 @@ describe('AsyncIconButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AsyncIconButtonComponent ]
-    })
-    .compileComponents();
+      imports: [FontAwesomeTestingModule],
+      declarations: [AsyncIconButtonComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AsyncIconButtonComponent);
     component = fixture.componentInstance;
