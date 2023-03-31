@@ -21,3 +21,10 @@ div.loading {
   justify-content: center;
   gap: 0.5em;
 }
+
+tbody {
+  .qty,
+  .price {
+    text-align: right;
+  }
+}
