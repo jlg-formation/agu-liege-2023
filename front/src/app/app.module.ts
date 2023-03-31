@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -25,7 +25,11 @@ registerLocaleData(BelgianLocale, 'fr-BE');
     FontAwesomeModule,
     HttpClientModule,
   ],
-  providers: [{ provide: ArticleService, useClass: HttpArticleService }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'fr-BE' },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
+    { provide: ArticleService, useClass: HttpArticleService },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
